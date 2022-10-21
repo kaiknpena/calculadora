@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <style>
+        .guardar{
+            visibility: hidden;
+            position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <input type="text" id="visor" value="0"></input>
+    <table>
+        <tr>
+            <td><button value="7" onclick="btnnumero(this.value)">7</button></td>
+            <td><button value="8" onclick="btnnumero(this.value)">8</button></td>
+            <td><button value="9" onclick="btnnumero(this.value)">9</button></td>
+            <td><button value="/" id="div" onclick="btnopera(this.value)">/</button></td>
+            <td><button value="C" id="c" onclick="btnC(this.value)">C</button></td>
+        </tr>
+        <tr>
+            <td><button value="4" onclick="btnnumero(this.value)">4</button></td>
+            <td><button value="5" onclick="btnnumero(this.value)">5</button></td>
+            <td><button value="6" onclick="btnnumero(this.value)">6</button></td>
+            <td><button value="*" id="mul" onclick="btnopera(this.value)">*</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button value="1" onclick="btnnumero(this.value)">1</button></td>
+            <td><button value="2" onclick="btnnumero(this.value)">2</button></td>
+            <td><button value="3" onclick="btnnumero(this.value)">3</button></td>
+            <td><button value="-" id="sub" onclick="btnopera(this.value)">-</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button value="0" onclick="btnnumero(this.value)">0</button></td>
+            <td></td>
+            <td><button value="+" id="som" onclick="btnopera(this.value)">+</button></td>
+            <td><button value="=" id="res" onclick="btnresult()">=</button></td>
+        </tr>
+    </table>
+    <p class="guardarn" id="guardarn" value="0"></p>
+    <p class="guardaro" id="guardaro" value="#"></p>
+</body>
+<script>
+    function btnnumero(valor){
+        var visor = document.getElementById("visor");
+        if(visor.value==0){
+            visor.value = valor;
+        }else{
+           visor.value = visor.value + valor;
+        }
+    }
+
+    function btnC(){
+        var visor = document.getElementById("visor");
+        var guardarn = document.getElementById("guardarn");
+        var guardaro = document.getElementById("guardaro");
+        visor.value = 0;
+        guardarn.value = 0;
+        guardaro.value = "#";
+    }
+
+    function btnopera(operador){
+        var visor = document.getElementById("visor");
+        var guardarn = document.getElementById("guardarn");
+        var guardaro = document.getElementById("guardaro");
+        if(visor.value != 0){
+            guardarn.value = visor.value;
+            visor.value = 0;
+            guardaro.value = operador;
+        }
+        console.log(guardarn.value);
+        console.log(guardaro.value);
+    }
+
+    function btnresult(){
+        var numero1 = document.getElementById("guardarn");
+        var visor = document.getElementById("visor");
+        var operar = document.getElementById("guardaro");
+        var valor1 = parseFloat(numero1.value);
+        var valor2 = parseFloat(visor.value);
+        var operador = operar.value;
+        if(operador=="+"){
+            visor.value = valor1+valor2;
+        }else if(operador=="-"){
+            visor.value = valor1-valor2;
+        }else if(operador=="/"){
+            visor.value = valor1/valor2;
+        }else if(operador=="*"){
+            visor.value = valor1*valor2;
+        }
+    }
+</script>
+
+</html>
